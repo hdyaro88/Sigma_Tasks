@@ -1,7 +1,6 @@
 const { db } = require("../firebase/firebase");
 exports.saveTask = async (req, res, next) => {
   try {
-    console.log(req.body);
     const docRef = db.collection("Tasks");
     const result = await docRef.add({
       ...req.body,
@@ -47,7 +46,6 @@ exports.getTask = async (req, res, next) => {
 
 exports.deleteTask = async (req, res, next) => {
   try {
-    console.log(req.body.id);
     const docRef = db.collection("Tasks").doc(req.body.id);
     const result = await docRef.delete();
     res.status(200).send({
@@ -65,7 +63,6 @@ exports.deleteTask = async (req, res, next) => {
 exports.updateTask = async (req, res, next) => {
   try {
     const task = req.body.editedTask;
-    console.log(task);
     const docRef = db.collection("Tasks").doc(task.id);
     const result = docRef.set(task);
     res.status(200).send({
